@@ -1,0 +1,27 @@
+<div class="root">
+  <button
+    class="tab"
+    [ngClass]="{
+      'active-tab': activeTab === 'login',
+      'inactive-tab': !(activeTab === 'login')
+    }"
+    (click)="handleClick('login')"
+  >
+    <img src="assets/login/svg/login-tab-icon.svg" alt="Login tab icon" />
+    <p>Iniciar sesión</p>
+  </button>
+  <button
+    class="tab"
+    [ngClass]="{
+      'active-tab': activeTab === 'signup',
+      'inactive-tab': !(activeTab === 'signup')
+    }"
+    (click)="handleClick('signup')"
+  >
+    <img
+      src="assets/registration/svg/registration-tab-icon.svg"
+      alt="Registration tab icon"
+    />
+    <p>Registrarme</p>
+  </button>
+</div>

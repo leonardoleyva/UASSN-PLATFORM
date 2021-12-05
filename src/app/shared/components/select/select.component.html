@@ -1,0 +1,33 @@
+<div class="root">
+  <button type="button" class="toggle-button" (click)="handleToggleSelect()">
+    <img *ngIf="iconSrc" [src]="iconSrc" alt="Select icon" />
+    <p>{{ activeItem.stringItem || label }}</p>
+    <img
+      class="drop-down-arrow"
+      [ngClass]="{
+        'drop-down-arrow-open': isOpen
+      }"
+      src="assets/shared/svg/drop-down-icon.svg"
+      alt="Dropdown icon"
+    />
+  </button>
+  <div
+    class="list"
+    [ngClass]="{
+      'list-open': isOpen
+    }"
+  >
+    <div *ngFor="let item of items">
+      <button
+        class="item-list"
+        type="button"
+        [ngClass]="{
+          'selected-item-list': activeItem.value === item.value
+        }"
+        (click)="setItem(item)"
+      >
+        {{ item.stringItem }}
+      </button>
+    </div>
+  </div>
+</div>

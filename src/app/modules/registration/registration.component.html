@@ -1,0 +1,140 @@
+<main class="page-root">
+  <div class="registration-container">
+    <img
+      src="assets/registration/img/registration-background.png"
+      alt="University background"
+    />
+
+    <div class="background-overlay"></div>
+
+    <section class="form-column">
+      <div class="form-container">
+        <img
+          class="form-container-app-logo"
+          src="assets/shared/svg/app-secondary-icon.svg"
+          alt="Application logo"
+        />
+
+        <app-auth-tab-menu activeTab="signup"></app-auth-tab-menu>
+
+        <form (ngSubmit)="handleSubmit()" #formRef="ngForm" class="form">
+          <div class="input-container">
+            <img
+              src="assets/registration/svg/user-icon.svg"
+              alt="Username icon"
+            />
+
+            <input
+              name="name"
+              class="input"
+              type="text"
+              pInputText
+              placeholder="Nombre completo"
+              required
+              [(ngModel)]="data.name"
+            />
+          </div>
+
+          <div class="input-container">
+            <img src="assets/shared/svg/at-icon.svg" alt="At icon" />
+
+            <input
+              name="email"
+              class="input"
+              type="email"
+              pInputText
+              placeholder="Correo electrónico"
+              required
+              [(ngModel)]="data.email"
+            />
+          </div>
+
+          <div class="input-container">
+            <img
+              src="assets/shared/svg/password-icon.svg"
+              alt="Password icon"
+            />
+
+            <input
+              name="password"
+              class="input"
+              type="password"
+              pInputText
+              required
+              placeholder="Contraseña"
+              [(ngModel)]="data.password"
+            />
+          </div>
+
+          <div class="input-container">
+            <img
+              src="assets/registration/svg/student-icon.svg"
+              alt="Password icon"
+            />
+
+            <input
+              name="studentID"
+              class="input"
+              type="text"
+              pInputText
+              required
+              placeholder="No. de Cuenta"
+              [(ngModel)]="data.studentID"
+            />
+          </div>
+
+          <app-select
+            iconSrc="assets/registration/svg/building-icon.svg"
+            label="Facultad"
+            [items]="[
+              {
+                value: 'fim',
+                stringItem: 'Facultad de Ingeniería'
+              },
+              {
+                value: 'fmm',
+                stringItem: 'Facultad de Medicina'
+              },
+              {
+                value: 'fem',
+                stringItem: 'Facultad de Enfermería'
+              },
+              {
+                value: 'fdm',
+                stringItem: 'Facultad de Derecho'
+              },
+              {
+                value: 'ftm',
+                stringItem: 'Facultad de Trabajo Social'
+              },
+            ]"
+            (onChange)="handleChangeFaculty($event)"
+          ></app-select>
+
+          <button
+            type="submit"
+            class="form-button"
+            [ngClass]="{
+              'is-button-disabled': formRef.invalid || !data.faculty.id
+            }"
+            [disabled]="formRef.invalid || !data.faculty.id"
+          >
+            <p>Registrarme</p>
+            <img
+              src="assets/shared/svg/arrow-right-line-icon.svg"
+              alt="Next icon"
+            />
+          </button>
+        </form>
+
+        <div class="university-credits-container">
+          <p>Creado por</p>
+          <img
+            src="assets/shared/img/university-icon.png"
+            alt="University logo"
+          />
+        </div>
+      </div>
+    </section>
+  </div>
+</main>

@@ -1,0 +1,46 @@
+.header {
+  height: 70px;
+}
+
+.auth-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f7f7f7;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0px 40px;
+  max-width: 1368px;
+
+  .header-university-logo {
+    width: 40px;
+    height: 50px;
+  }
+
+  .header-app-logo {
+    width: 100px;
+    height: 24px;
+  }
+}
+
+.avatar-menu-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.menu-icon {
+  color: #125e99;
+  cursor: pointer;
+}
+
+.unauth-header {
+  width: 100%;
+  opacity: 0;
+}

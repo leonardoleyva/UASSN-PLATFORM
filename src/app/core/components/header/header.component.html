@@ -1,0 +1,23 @@
+<header *ngIf="isLoggedIn" class="header auth-header">
+  <div class="header-content">
+    <img
+      class="header-university-logo"
+      src="assets/shared/img/university-icon.png"
+      alt="University logo"
+    />
+    <img
+      class="header-app-logo"
+      src="assets/shared/svg/app-primary-icon.svg"
+      alt="Application logo"
+    />
+    <div class="avatar-menu-container">
+      <app-avatar
+        [userName]="user.name"
+        [src]="user.profileImg"
+        [isOnline]="isLoggedIn"
+      ></app-avatar>
+      <i class="pi pi-chevron-down menu-icon"></i>
+    </div>
+  </div>
+</header>
+<header *ngIf="!isLoggedIn" class="header unauth-header"></header>

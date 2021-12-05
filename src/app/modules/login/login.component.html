@@ -1,0 +1,78 @@
+<main class="page-root">
+  <div class="login-container">
+    <img
+      src="assets/login/img/login-background-icon.jpg"
+      alt="University background"
+    />
+
+    <div class="background-overlay"></div>
+
+    <section class="form-column">
+      <div class="form-container">
+        <img
+          class="form-container-app-logo"
+          src="assets/shared/svg/app-secondary-icon.svg"
+          alt="Application logo"
+        />
+
+        <app-auth-tab-menu></app-auth-tab-menu>
+
+        <form (ngSubmit)="handleSubmit()" #formRef="ngForm" class="form">
+          <div class="input-container">
+            <img src="assets/shared/svg/at-icon.svg" alt="At icon" />
+
+            <input
+              name="email"
+              class="input"
+              type="email"
+              pInputText
+              placeholder="Correo electrónico"
+              required
+              [(ngModel)]="data.email"
+            />
+          </div>
+
+          <div class="input-container">
+            <img
+              src="assets/shared/svg/password-icon.svg"
+              alt="Password icon"
+            />
+
+            <input
+              name="password"
+              class="input"
+              type="password"
+              pInputText
+              required
+              placeholder="Contraseña"
+              [(ngModel)]="data.password"
+            />
+          </div>
+
+          <button
+            type="submit"
+            class="form-button"
+            [ngClass]="{
+              'is-button-disabled': formRef.invalid
+            }"
+            [disabled]="formRef.invalid"
+          >
+            <p>Ingresar</p>
+            <img
+              src="assets/shared/svg/arrow-right-line-icon.svg"
+              alt="Next icon"
+            />
+          </button>
+        </form>
+
+        <div class="university-credits-container">
+          <p>Creado por</p>
+          <img
+            src="assets/shared/img/university-icon.png"
+            alt="University logo"
+          />
+        </div>
+      </div>
+    </section>
+  </div>
+</main>

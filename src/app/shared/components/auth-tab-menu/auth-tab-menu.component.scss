@@ -1,0 +1,48 @@
+.root {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+}
+
+.tab {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease-in-out;
+  outline: none;
+
+  &:hover {
+    background-color: rgba(#979797, $alpha: 0.1);
+  }
+
+  &:focus {
+    background-color: rgba(#979797, $alpha: 0.3);
+  }
+}
+
+.active-tab {
+  border-bottom: 2px solid #125e99;
+
+  p {
+    color: #125e99;
+  }
+}
+
+.inactive-tab {
+  border-bottom: 2px solid #979797;
+
+  img {
+    display: none;
+  }
+
+  p {
+    color: #909090;
+  }
+}
