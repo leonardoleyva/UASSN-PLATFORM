@@ -49,4 +49,33 @@
 
 .post-body {
   color: #909090;
+
+  & > img {
+    width: 100%;
+    margin-top: 16px;
+    max-height: 640px;
+  }
+}
+
+.post-footer {
+  margin-top: 24px;
+}
+
+.post-footer-actions {
+  display: flex;
+  gap: 16px;
+}
+
+.post-footer-action {
+  display: flex;
+  gap: 8px;
+
+  & > p {
+    color: #125e99;
+    cursor: default;
+  }
+
+  & > i {
+    cursor: pointer;
+  }
 }

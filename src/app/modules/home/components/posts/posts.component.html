@@ -1,3 +1,35 @@
 <section class="root">
-  <app-post></app-post>
+  <div>
+    <app-post-maker (onSubmit)="handleSubmitPost($event)"></app-post-maker>
+  </div>
+
+  <div class="posts-menu-bar">
+    <button class="menu-bar-item">
+      <img
+        src="assets/shared/svg/last-news-active-icon.svg"
+        alt="Last news icon"
+      />
+      Últimas noticias
+    </button>
+    <button class="menu-bar-item">
+      <img src="assets/shared/svg/favorite-icon.svg" alt="Last news icon" />
+      Favoritos
+    </button>
+    <button class="menu-bar-item">
+      <img src="assets/shared/svg/groups-icon.svg" alt="Last news icon" />
+      Grupos
+    </button>
+  </div>
+
+  <div class="posts-container">
+    <app-post
+      *ngFor="let post of posts"
+      [userId]="post.userId"
+      [userName]="post.userName"
+      [likes]="post.likes"
+      [facultyName]="post.faculty.name"
+      [comments]="post.comments"
+      [postContent]="{ text: post.body.text, img: post.body.image }"
+    ></app-post>
+  </div>
 </section>

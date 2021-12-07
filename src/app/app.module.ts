@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 
 import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CheckboxModule } from 'primeng/checkbox';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -30,6 +33,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { userReducer } from './core/auth/user.reducer';
 import { PostsComponent } from './modules/home/components/posts/posts.component';
 import { PostComponent } from './modules/home/components/post/post.component';
+import { PostMakerComponent } from './shared/components/post-maker/post-maker.component';
 
 @NgModule({
   declarations: [
@@ -46,12 +50,16 @@ import { PostComponent } from './modules/home/components/post/post.component';
     HomePageComponent,
     PostsComponent,
     PostComponent,
+    PostMakerComponent,
   ],
   imports: [
     BrowserModule,
     InputTextModule,
+    InputTextareaModule,
     CheckboxModule,
     FormsModule,
+    PickerModule,
+    EmojiModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),

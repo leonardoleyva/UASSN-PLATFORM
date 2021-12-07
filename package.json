@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~13.0.0",
     "@angular/platform-browser-dynamic": "~13.0.0",
     "@angular/router": "~13.0.0",
+    "@ctrl/ngx-emoji-mart": "^6.1.1",
     "@ngrx/router-store": "^13.0.1",
     "@ngrx/store": "^13.0.1",
     "firebase": "^9.4.0",

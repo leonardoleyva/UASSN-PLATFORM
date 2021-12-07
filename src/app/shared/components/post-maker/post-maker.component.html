@@ -1,0 +1,69 @@
+<div
+  class="root"
+  [ngClass]="{
+    'root-active': !!value.text
+  }"
+>
+  <textarea
+    placeholder="¿Como te encuentras hoy?..."
+    class="rich-text"
+    [rows]="1"
+    pInputTextarea
+    [autoResize]="true"
+    [(ngModel)]="value.text"
+    [value]="value.text"
+  ></textarea>
+  <div class="post-maker-actions">
+    <div class="post-maker-actions-emojis">
+      <img
+        src="{{
+          !!value.text
+            ? 'assets/shared/svg/emoji-active-icon.svg'
+            : 'assets/shared/svg/emoji-icon.svg'
+        }}"
+        alt=""
+        (click)="handleToggleEmojiSelector()"
+      />
+
+      <emoji-mart
+        class="emoji-selector"
+        [ngClass]="{
+          'emoji-selector-open': isEmojiSelectorOpen
+        }"
+        [showPreview]="false"
+        title="UASSN"
+        [perLine]="8"
+        set="facebook"
+        (emojiSelect)="handleSelectEmoji($event)"
+      ></emoji-mart>
+    </div>
+    <div class="post-maker-actions-image">
+      <img
+        src="{{
+          !!value.image
+            ? 'assets/shared/svg/camera-active-icon.svg'
+            : 'assets/shared/svg/camera-icon.svg'
+        }}"
+        alt=""
+      />
+      <input type="file" class="input-image" accept="image/png, image/jpeg, image/jpg" (change)="handleChooseImg($event)" />
+    </div>
+
+    <span
+      class="separator-actions-submit"
+      [ngClass]="{
+        'separator-actions-submit-active': !!value.text
+      }"
+    ></span>
+
+    <img
+      class="button-submit"
+      [ngClass]="{
+        'button-submit-disabled': !value.text && !value.image
+      }"
+      src="assets/shared/svg/submit-icon.svg"
+      alt=""
+      (click)="handleSubmit()"
+    />
+  </div>
+</div>

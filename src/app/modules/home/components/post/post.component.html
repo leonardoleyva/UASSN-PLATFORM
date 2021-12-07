@@ -1,16 +1,30 @@
 <div class="root">
   <header class="post-header">
     <div class="post-header-owner">
-      <app-avatar userName="Angela Aguilar" [isOnline]="true"></app-avatar>
+      <app-avatar [userName]="userName" [isOnline]="true"></app-avatar>
       <div class="post-header-owner-info">
-        <h3>Angela Aguilar</h3>
-        <h4>Maestra de Ingeniería de Software</h4>
+        <h3>{{ userName }}</h3>
+        <h4>{{ facultyName }}</h4>
       </div>
     </div>
     <div class="post-options">
       <i class="pi pi-ellipsis-h post-options-icon"></i>
     </div>
   </header>
-  <div class="post-body">Paga tus deudas desde tu app</div>
-  <div class="post-footer"></div>
+  <div class="post-body">
+    {{ postContent.text }}
+    <img *ngIf="!!postContent.img" src="{{ postContent.img }}" alt="Post image" />
+  </div>
+  <div class="post-footer">
+    <div class="post-footer-actions">
+      <div class="post-footer-action">
+        <p>{{ likes }}</p>
+        <i class="pi pi-thumbs-up"></i>
+      </div>
+      <div class="post-footer-action">
+        <p>{{ comments }}</p>
+        <i class="pi pi-comment"></i>
+      </div>
+    </div>
+  </div>
 </div>
