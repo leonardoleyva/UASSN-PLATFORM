@@ -4,6 +4,7 @@ import { AuthGuard } from './core/auth/auth.guard';
 import { UnauthGuard } from './core/auth/unauth.guard';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { RegistrationPageComponent } from './pages/registration-page/registration-page.component';
 
 const routes: Routes = [
@@ -14,6 +15,8 @@ const routes: Routes = [
     canActivate: [UnauthGuard],
   },
   { path: '', component: HomePageComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfilePageComponent, canActivate: [AuthGuard] },
+  { path: 'profile/:id', component: ProfilePageComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

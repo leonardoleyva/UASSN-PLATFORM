@@ -1,0 +1,57 @@
+<section class="root">
+  <div class="profile-data-container">
+    <img
+      class="cover-page"
+      src="assets/profile/img/profile-cover-page.jpeg"
+      alt=""
+    />
+    <div class="profile-data">
+      <div class="image-container">
+        <img
+          *ngIf="userProfile.profileImg || currentUser.profileImg"
+          class="profile-data-img"
+          [src]="userProfile.profileImg || currentUser.profileImg"
+          alt="User profile image"
+        />
+
+        <div *ngIf="!currentUser.profileImg" class="profile-data-without-img">
+          L
+        </div>
+
+        <div class="overlay-upload-image">Actualizar foto de perfil</div>
+
+        <input
+          type="file"
+          class="input-image"
+          accept="image/png, image/jpeg, image/jpg"
+          (change)="uploadProfileImg($event)"
+        />
+      </div>
+
+      <div class="profile-personal-data">
+        <h2>{{ userProfile.name || currentUser.name }}</h2>
+        <p>{{ userProfile.faculty.name || currentUser.faculty.name }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div
+    *ngIf="(!userProfile.userId && userProfile.userId !== currentUser.userId)"
+    class="post-maker-container"
+  >
+    <app-post-maker (onSubmit)="handleSubmitPost($event)"></app-post-maker>
+  </div>
+
+  <div class="posts-container">
+    <app-post
+      *ngFor="let post of posts"
+      [userId]="post.userId"
+      [userName]="post.userName"
+      [userImg]="post.profileImg"
+      [likes]="post.likes"
+      [facultyName]="post.faculty.name"
+      [comments]="post.comments"
+      [postContent]="{ text: post.body.text, img: post.body.image }"
+    ></app-post>
+  </div>
+</section>

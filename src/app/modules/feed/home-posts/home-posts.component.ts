@@ -1,17 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Unsubscribe } from '@firebase/util';
 import { Store } from '@ngrx/store';
-import { PostMakerValue } from 'src/app/shared/components/post-maker/post-maker.component';
-import { PostService } from 'src/services/post/service';
-import { Post } from 'src/services/post/type';
+import { PostMakerValue } from 'src/app/modules/feed/components/post-maker/post-maker.component';
+import { FeedService } from 'src/services/feed/service';
+import { Post } from 'src/services/feed/type';
 import { BasicUserData } from 'src/services/user/type';
 
 @Component({
-  selector: 'app-posts',
-  templateUrl: './posts.component.html',
-  styleUrls: ['./posts.component.scss'],
+  selector: 'app-home-posts',
+  templateUrl: './home-posts.component.html',
+  styleUrls: ['./home-posts.component.scss'],
 })
-export class PostsComponent implements OnInit, OnDestroy {
+export class HomePostsComponent implements OnInit, OnDestroy {
   user: BasicUserData = {
     userId: '',
     name: '',
@@ -25,7 +25,7 @@ export class PostsComponent implements OnInit, OnDestroy {
   unsubscribePosts: Unsubscribe | undefined;
 
   constructor(
-    private postService: PostService,
+    private feedService: FeedService,
     private store: Store<{ userState: BasicUserData }>
   ) {}
 
@@ -44,7 +44,7 @@ export class PostsComponent implements OnInit, OnDestroy {
   }
 
   handleFetchPosts() {
-    const { unsubscribe, posts } = this.postService.getAll();
+    const { unsubscribe, posts } = this.feedService.getAllPosts();
     this.posts = posts;
     this.unsubscribePosts = unsubscribe;
   }
@@ -52,7 +52,7 @@ export class PostsComponent implements OnInit, OnDestroy {
   async handleSubmitPost(value: PostMakerValue) {
     const { userId, name, profileImg, faculty } = this.user;
 
-    await this.postService.createOne({
+    await this.feedService.createPost({
       userId,
       userName: name,
       profileImg,

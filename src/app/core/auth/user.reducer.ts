@@ -14,7 +14,11 @@ const initialState: BasicUserData = {
 
 const _userReducer = createReducer(
   initialState,
-  on(actions.setUserState, (_, data) => data)
+  on(actions.setUserState, (_, data) => data),
+  on(actions.setProfileImg, (state, data) => ({
+    ...state,
+    profileImg: data.img,
+  }))
 );
 
 export function userReducer(state: BasicUserData | undefined, action: Action) {

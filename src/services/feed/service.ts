@@ -8,6 +8,7 @@ import {
   onSnapshot,
   doc,
   updateDoc,
+  where,
 } from '@angular/fire/firestore';
 import {
   Storage,
@@ -15,17 +16,18 @@ import {
   uploadString,
   getDownloadURL,
 } from '@angular/fire/storage';
+import { Unsubscribe } from '@firebase/util';
 import { Post } from './type';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PostService {
+export class FeedService {
   private serviceCollection: string = 'posts';
 
   constructor(private db: Firestore, private storageRef: Storage) {}
 
-  async createOne({
+  async createPost({
     userId,
     userName,
     profileImg,
@@ -33,7 +35,7 @@ export class PostService {
     body,
   }: Omit<Post, 'likes' | 'comments' | 'createdAt' | 'postId'>) {
     try {
-      const { text: postText, image: postImage } = body
+      const { text: postText, image: postImage } = body;
       const collectionRef = collection(this.db, this.serviceCollection);
       const post = await addDoc(collectionRef, {
         postId: '',
@@ -62,19 +64,18 @@ export class PostService {
     }
   }
 
-  async uploadPostImg(file: string, postId: string) {
+  private async uploadPostImg(file: string, postId: string) {
     const postImgRef = ref(this.storageRef, `posts/${postId}.jpg`);
     const [, value] = file.split('base64,');
     await uploadString(postImgRef, value, 'base64');
     return getDownloadURL(postImgRef);
   }
 
-  getAll() {
+  getAllPosts(): { posts: Post[]; unsubscribe: Unsubscribe } {
     let posts: Post[] = [];
     const collectionRef = collection(this.db, this.serviceCollection);
     const onSnapshotQuery = query(collectionRef, orderBy('createdAt'));
     const unsubscribe = onSnapshot(onSnapshotQuery, (querySnapshot) => {
-      // Easier but maybe not better
       posts.length = 0;
       querySnapshot.docs.forEach((doc) => {
         posts.unshift({ ...doc.data(), postId: doc.id } as Post);
@@ -87,5 +88,27 @@ export class PostService {
     };
   }
 
-  async getPostsById(id: string) {}
+  /**
+   * `id` param can be an userId or groupId
+   */
+  getPostsById(id: string): { posts: Post[]; unsubscribe: Unsubscribe } {
+    let posts: Post[] = [];
+    const collectionRef = collection(this.db, this.serviceCollection);
+    const onSnapshotQuery = query(
+      collectionRef,
+      where('userId', '==', id),
+      orderBy('createdAt')
+    );
+    const unsubscribe = onSnapshot(onSnapshotQuery, (querySnapshot) => {
+      posts.length = 0;
+      querySnapshot.docs.forEach((doc) => {
+        posts.unshift({ ...doc.data(), postId: doc.id } as Post);
+      });
+    });
+
+    return {
+      posts,
+      unsubscribe,
+    };
+  }
 }

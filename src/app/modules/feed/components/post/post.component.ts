@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class PostComponent implements OnInit {
   @Input() userId: string = '';
   @Input() userName: string = '';
+  @Input() userImg: string = '';
   @Input() userType: string = '';
   @Input() facultyName: string = '';
   @Input() postContent: { text: string; img?: string } = { text: '' };

@@ -28,12 +28,13 @@ import { provideMessaging, getMessaging } from '@angular/fire/messaging';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { StoreModule } from '@ngrx/store';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
-import { HomeComponent } from './modules/home/home.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { userReducer } from './core/auth/user.reducer';
-import { PostsComponent } from './modules/home/components/posts/posts.component';
-import { PostComponent } from './modules/home/components/post/post.component';
-import { PostMakerComponent } from './shared/components/post-maker/post-maker.component';
+import { HomePostsComponent } from './modules/feed/home-posts/home-posts.component';
+import { PostComponent } from './modules/feed/components/post/post.component';
+import { PostMakerComponent } from './modules/feed/components/post-maker/post-maker.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { ProfilePostsComponent } from './modules/feed/profile-posts/profile-posts.component';
 
 @NgModule({
   declarations: [
@@ -46,11 +47,12 @@ import { PostMakerComponent } from './shared/components/post-maker/post-maker.co
     RegistrationComponent,
     RegistrationPageComponent,
     SelectComponent,
-    HomeComponent,
     HomePageComponent,
-    PostsComponent,
+    HomePostsComponent,
     PostComponent,
     PostMakerComponent,
+    ProfilePageComponent,
+    ProfilePostsComponent,
   ],
   imports: [
     BrowserModule,

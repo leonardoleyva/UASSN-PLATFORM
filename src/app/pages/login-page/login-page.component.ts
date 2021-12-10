@@ -9,15 +9,6 @@ import { BasicUserData } from 'src/services/user/type';
   styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent {
-  user: BasicUserData = {
-    userId: '',
-    name: '',
-    profileImg: '',
-    faculty: {
-      id: '',
-      name: '',
-    },
-  };
   constructor(private titleService: Title) {
     this.titleService.setTitle(
       `${environment.PLATFORM_NAME} - Inicio de sesión`
