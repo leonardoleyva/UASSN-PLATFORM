@@ -1,5 +1,14 @@
 import { Injectable } from '@angular/core';
-import { doc, getDoc, Firestore, updateDoc } from '@angular/fire/firestore';
+import {
+  doc,
+  getDoc,
+  Firestore,
+  updateDoc,
+  collection,
+  query,
+  getDocs,
+  orderBy,
+} from '@angular/fire/firestore';
 import {
   getDownloadURL,
   ref,
@@ -8,7 +17,9 @@ import {
   deleteObject,
   StorageReference,
 } from '@angular/fire/storage';
-import { BasicUserData } from './type';
+import { Unsubscribe } from '@firebase/util';
+import { onSnapshot } from 'firebase/firestore';
+import { BasicUserData, User } from './type';
 
 @Injectable({
   providedIn: 'root',
@@ -60,22 +71,41 @@ export class UserService {
         await deleteObject(userImgRef);
       }
 
-      const imgURL = await this.uploadPostImg(base64Img, userImgRef);
+      const imgURL = await this.uploadProfileImg(base64Img, userImgRef);
       const userRef = doc(this.db, this.serviceCollection, userId);
 
       updateDoc(userRef, {
         profileImg: imgURL,
       });
 
-      return imgURL
+      return imgURL;
     } catch (error) {
       throw error;
     }
   }
 
-  private async uploadPostImg(file: string, ref: StorageReference) {
+  private async uploadProfileImg(file: string, ref: StorageReference) {
     const [, value] = file.split('base64,');
     await uploadString(ref, value, 'base64');
     return getDownloadURL(ref);
+  }
+
+  getUsers(userId: string): { users: User[]; unsubscribe: Unsubscribe } {
+    const collectionRef = collection(this.db, this.serviceCollection);
+    const q = query(collectionRef, orderBy('name'));
+
+    const users: User[] = [];
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      users.length = 0;
+      querySnapshot.docs.forEach((doc) => {
+        const data = doc.data() as User;
+        if (userId === data.userId) return;
+
+        users.push(data);
+      });
+      console.log(users)
+    });
+
+    return { users, unsubscribe };
   }
 }

@@ -1,0 +1,13 @@
+<section class="root">
+  <h2 class="users-section-title">Mis conversaciones</h2>
+
+  <div class="users-container">
+    <app-chat-user
+      *ngFor="let user of users"
+      [userId]="user.userId"
+      [userName]="user.name"
+      [isUserOnline]="user.isOnline"
+      (onClick)="handleUserClick($event)"
+    ></app-chat-user>
+  </div>
+</section>

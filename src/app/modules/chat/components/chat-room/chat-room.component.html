@@ -1,0 +1,59 @@
+<section class="root">
+  <header class="chat-room-header">
+    <app-avatar
+      src="https://firebasestorage.googleapis.com/v0/b/uassn-dev.appspot.com/o/users%2FFy1wQvYLbygxXxcZKzOsbICQzgi1.jpg?alt=media&token=a6c84f8e-a82e-4f9b-ad84-bcb08e65d197"
+      [isOnline]="false"
+    ></app-avatar>
+    <div>
+      <h3>{{ convMember.name || "asd" }}</h3>
+    </div>
+    <img
+      class="chat-settings-icon"
+      src="assets/shared/svg/settings-icon.svg"
+      alt="Settings icon"
+      (click)="handleClose()"
+    />
+  </header>
+  <div
+    #scrollMe
+    class="chat-room-body"
+    [ngClass]="{ 'chat-room-body-smooth-scroll': isSmoothScroll }"
+  >
+    <div
+      *ngFor="let message of messages"
+      class="message"
+      [ngClass]="{ 'my-message': userId === message.userId }"
+    >
+      <app-avatar
+        [src]="getImage(message.userId)"
+        size="sm"
+        borderRadius="sm"
+        [isOnline]="true"
+      ></app-avatar>
+      <p
+        class="message-text"
+        [ngClass]="{ 'my-message-text': userId === message.userId }"
+      >
+        {{ message.text }}
+      </p>
+    </div>
+  </div>
+  <footer class="chat-room-message-maker">
+    <textarea
+      autofocus
+      class="message-maker-input"
+      type="text"
+      [(ngModel)]="value.text"
+      [value]="value.text"
+    ></textarea>
+
+    <span class="separator-actions-submit"></span>
+
+    <img
+      class="message-maker-submit"
+      src="assets/shared/svg/submit-icon.svg"
+      alt="Submit icon"
+      (click)="handleSubmit()"
+    />
+  </footer>
+</section>

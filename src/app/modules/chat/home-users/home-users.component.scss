@@ -1,0 +1,29 @@
+.root {
+  width: calc(100% - 16px - 16px);
+  height: 100%;
+  padding: 16px;
+}
+
+.users-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.my-conversations-container {
+  height: auto;
+  max-height: 144px;
+  margin-bottom: 24px;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.users-section-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #384A6D;
+}

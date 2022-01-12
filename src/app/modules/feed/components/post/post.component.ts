@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FeedService } from 'src/services/feed/service';
+import { getImageURL } from 'src/services/utils/functions';
 
 @Component({
   selector: 'app-post',
@@ -15,7 +17,15 @@ export class PostComponent implements OnInit {
   @Input() likes: number = 0;
   @Input() comments: number = 0;
 
-  constructor() {}
+  imageURL = '';
 
-  ngOnInit(): void {}
+  constructor(private feedService: FeedService) {}
+
+  ngOnInit(): void {
+    this.setUserProfileImg();
+  }
+
+  async setUserProfileImg() {
+    this.imageURL = getImageURL(this.userId, '/users');
+  }
 }

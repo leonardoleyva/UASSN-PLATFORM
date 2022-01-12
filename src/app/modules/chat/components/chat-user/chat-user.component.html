@@ -1,0 +1,14 @@
+<div class="root">
+  <div class="avatar-container">
+    <app-avatar [src]="userImg" [isOnline]="isUserOnline"></app-avatar>
+  </div>
+  <div class="chat-user-content" (click)="handleClick()">
+    <p class="chat-user-username">{{ userName }}</p>
+  </div>
+  <img
+    class="chat-user-actions"
+    src="assets/shared/svg/chat-user-actions-icon.svg"
+    alt="Chat user actions icon"
+    (click)="handleClick()"
+  />
+</div>

@@ -1,0 +1,37 @@
+.root {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 48px;
+  cursor: pointer;
+}
+
+.avatar-container {
+  position: absolute;
+  left: 0px;
+}
+
+.chat-user-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.chat-user-username {
+  margin-left: calc(48px + 8px);
+  max-width: calc(100% - 48px - 16px - 12px);
+  color: #125e99;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chat-user-actions {
+  position: absolute;
+  right: 0px;
+  cursor: pointer;
+  user-select: none;
+}

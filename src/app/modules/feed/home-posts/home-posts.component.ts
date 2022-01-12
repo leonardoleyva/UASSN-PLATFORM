@@ -1,10 +1,19 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Unsubscribe } from '@firebase/util';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import { PostMakerValue } from 'src/app/modules/feed/components/post-maker/post-maker.component';
+import { ChatService } from 'src/services/chat/service';
+import { Message } from 'src/services/chat/type';
 import { FeedService } from 'src/services/feed/service';
 import { Post } from 'src/services/feed/type';
 import { BasicUserData } from 'src/services/user/type';
+import {
+  ChatRoomState,
+  setChatRoom,
+  setIsChatRoomOpen,
+} from '../../chat/state/chat.actions';
+import { initialChatRoomState } from '../../chat/state/chat.reducer';
 
 @Component({
   selector: 'app-home-posts',
@@ -21,26 +30,51 @@ export class HomePostsComponent implements OnInit, OnDestroy {
       name: '',
     },
   };
+  chatRoom: ChatRoomState = initialChatRoomState;
+  chatRoomMessages: Message[] = [];
   posts: Post[] = [];
   unsubscribePosts: Unsubscribe | undefined;
+  unsubscribeMessages: Unsubscribe | undefined;
+  userSubscription: Subscription | undefined;
+  chatSubscription: Subscription | undefined;
 
   constructor(
     private feedService: FeedService,
-    private store: Store<{ userState: BasicUserData }>
+    private chatService: ChatService,
+    private userStore: Store<{ userState: BasicUserData }>,
+    private chatStore: Store<{ chatState: ChatRoomState }>
   ) {}
 
   ngOnInit(): void {
-    this.store.select('userState').subscribe((data) => {
-      this.user = data;
+    this.userSubscription = this.userStore
+      .select('userState')
+      .subscribe((data) => {
+        this.user = data;
 
-      if (!this.user.userId) return;
+        if (!this.user.userId) return;
 
-      this.handleFetchPosts();
-    });
+        this.handleFetchPosts();
+      });
+
+    this.chatSubscription = this.chatStore
+      .select('chatState')
+      .subscribe((data) => {
+        if (!this.chatRoom.chatRoomId && data.chatRoomId) {
+          this.chatStore.dispatch(setIsChatRoomOpen({ isOpen: true }));
+        }
+
+        this.chatRoom = data;
+
+        if (!this.chatRoom.chatRoomId) return;
+
+        this.getChatRoomMessages(this.chatRoom.chatRoomId);
+      });
   }
 
   ngOnDestroy() {
     this.unsubscribePosts?.();
+    this.chatSubscription?.unsubscribe();
+    this.userSubscription?.unsubscribe();
   }
 
   handleFetchPosts() {
@@ -59,5 +93,25 @@ export class HomePostsComponent implements OnInit, OnDestroy {
       faculty,
       body: value,
     });
+  }
+
+  async sendMessage({ text }: { text: string; image?: string }) {
+    await this.chatService.sendMessage(this.chatRoom.chatRoomId, {
+      userId: this.user.userId,
+      text,
+    });
+  }
+
+  async handleChatRoomSubmit(value: { text: string }) {
+    if (!value.text) return;
+    this.sendMessage(value);
+    console.log(value);
+  }
+
+  getChatRoomMessages(chatRoomId: string) {
+    const { messages, unsubscribe } =
+      this.chatService.getChatRoomMessages(chatRoomId);
+    this.chatRoomMessages = messages;
+    this.unsubscribeMessages = unsubscribe;
   }
 }

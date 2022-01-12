@@ -33,4 +33,12 @@
       [postContent]="{ text: post.body.text, img: post.body.image }"
     ></app-post>
   </div>
+
+  <app-chat-room
+    *ngIf="chatRoom.chatRoomId && chatRoom.isOpen"
+    [userId]="user.userId"
+    [members]="chatRoom.members"
+    (onSubmit)="handleChatRoomSubmit($event)"
+    [messages]="chatRoomMessages"
+  ></app-chat-room>
 </section>

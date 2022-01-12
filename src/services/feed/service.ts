@@ -24,6 +24,7 @@ import { Post } from './type';
 })
 export class FeedService {
   private serviceCollection: string = 'posts';
+  private folderStorage: string = 'posts';
 
   constructor(private db: Firestore, private storageRef: Storage) {}
 
@@ -110,5 +111,10 @@ export class FeedService {
       posts,
       unsubscribe,
     };
+  }
+
+  async getUserProfileImg(userId: string): Promise<string> {
+    const userImgRef = ref(this.storageRef, `users/${userId}.jpg`);
+    return getDownloadURL(userImgRef);
   }
 }

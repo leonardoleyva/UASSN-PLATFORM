@@ -9,6 +9,7 @@ import { PostMakerValue } from '../components/post-maker/post-maker.component';
 import { Unsubscribe } from '@firebase/util';
 import { Post } from 'src/services/feed/type';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 const defaultUserValue: BasicUserData = {
   userId: '',
@@ -29,6 +30,7 @@ export class ProfilePostsComponent implements OnInit {
   currentUser: BasicUserData = { ...defaultUserValue };
   userProfile: BasicUserData = { ...defaultUserValue };
   posts: Post[] = [];
+  userSubscription: Subscription | undefined;
   unsubscribePosts: Unsubscribe | undefined;
 
   constructor(
@@ -47,7 +49,7 @@ export class ProfilePostsComponent implements OnInit {
       this.handleFetchUserPosts(this.userProfile.userId);
     }
 
-    this.store.select('userState').subscribe((data) => {
+    this.userSubscription = this.store.select('userState').subscribe((data) => {
       this.currentUser = data;
 
       if (!this.currentUser.userId || profileId) return;
@@ -58,6 +60,7 @@ export class ProfilePostsComponent implements OnInit {
 
   ngOnDestroy() {
     this.unsubscribePosts?.();
+    this.userSubscription?.unsubscribe();
   }
 
   async handleFetchUserProfile(userId: string) {
@@ -65,7 +68,6 @@ export class ProfilePostsComponent implements OnInit {
       const user = await this.userService.getBasicData(userId);
 
       this.userProfile = user;
-      console.log(this.userProfile);
     } catch (error: any) {}
   }
 

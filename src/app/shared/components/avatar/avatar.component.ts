@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
-type AvatarSize = 'sm' | 'md';
-type BorderRadiusSize = 'sm' | 'md';
+type AvatarSize = 'xs' | 'sm' | 'md';
+type BorderRadiusSize = 'xs' | 'sm' | 'md';
 
 @Component({
   selector: 'app-avatar',

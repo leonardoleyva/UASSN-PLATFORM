@@ -35,6 +35,10 @@ import { PostComponent } from './modules/feed/components/post/post.component';
 import { PostMakerComponent } from './modules/feed/components/post-maker/post-maker.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { ProfilePostsComponent } from './modules/feed/profile-posts/profile-posts.component';
+import { ChatUserComponent } from './modules/chat/components/chat-user/chat-user.component';
+import { HomeUsersComponent } from './modules/chat/home-users/home-users.component';
+import { ChatRoomComponent } from './modules/chat/components/chat-room/chat-room.component';
+import { chatReducer } from './modules/chat/state/chat.reducer';
 
 @NgModule({
   declarations: [
@@ -53,6 +57,9 @@ import { ProfilePostsComponent } from './modules/feed/profile-posts/profile-post
     PostMakerComponent,
     ProfilePageComponent,
     ProfilePostsComponent,
+    ChatUserComponent,
+    HomeUsersComponent,
+    ChatRoomComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,6 +78,7 @@ import { ProfilePostsComponent } from './modules/feed/profile-posts/profile-post
     StoreModule.forRoot({
       router: routerReducer,
       userState: userReducer,
+      chatState: chatReducer,
     }),
     AppRoutingModule,
     StoreRouterConnectingModule.forRoot(),
