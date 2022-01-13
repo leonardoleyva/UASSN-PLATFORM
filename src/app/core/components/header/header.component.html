@@ -22,7 +22,12 @@
           class="pi pi-chevron-down menu-icon"
           [ngClass]="{ 'menu-icon-reverse': isMenuOpen }"
         ></i>
-        <app-header-menu [isOpen]="isMenuOpen" (onLogout)="handleLogout()"></app-header-menu>
+        <app-header-menu
+          [isOpen]="isMenuOpen"
+          (onLogout)="handleLogout()"
+          (onGoProfile)="handleGoProfile()"
+          (onGoHome)="handleGoHome()"
+        ></app-header-menu>
       </div>
     </div>
   </div>

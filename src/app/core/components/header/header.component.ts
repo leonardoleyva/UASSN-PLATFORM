@@ -43,7 +43,13 @@ export class HeaderComponent implements OnInit {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  handleGoProfile() {}
+  handleGoHome() {
+    this.router.navigate(['']);
+  }
+
+  handleGoProfile() {
+    this.router.navigate(['profile']);
+  }
 
   async handleLogout() {
     await this.authService.logout(this.user.userId);

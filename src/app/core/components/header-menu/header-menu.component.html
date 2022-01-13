@@ -9,6 +9,13 @@
   <div
     class="menu-item"
     [ngClass]="{ 'menu-item-closed': !isOpen }"
+    (click)="handleGoHome()"
+  >
+    Publicaciones
+  </div>
+  <div
+    class="menu-item"
+    [ngClass]="{ 'menu-item-closed': !isOpen }"
     (click)="handleLogout()"
   >
     Cerrar sesion
