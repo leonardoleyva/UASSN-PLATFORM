@@ -39,7 +39,8 @@
     [userId]="user.userId"
     [members]="chatRoom.members"
     [convMember]="chatRoom.convMember"
-    (onSubmit)="handleChatRoomSubmit($event)"
     [messages]="chatRoomMessages"
+    (onSubmit)="handleChatRoomSubmit($event)"
+    (onClose)="handleCloseChatRoom()"
   ></app-chat-room>
 </section>

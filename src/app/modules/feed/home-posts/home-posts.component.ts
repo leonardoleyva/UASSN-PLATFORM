@@ -113,4 +113,15 @@ export class HomePostsComponent implements OnInit, OnDestroy {
     this.chatRoomMessages = messages;
     this.unsubscribeMessages = unsubscribe;
   }
+
+  handleCloseChatRoom() {
+    this.chatStore.dispatch(
+      setChatRoom({
+        chatRoomId: '',
+        convMember: { name: '', userId: '' },
+        members: [],
+      })
+    );
+    this.chatStore.dispatch(setIsChatRoomOpen({ isOpen: false }));
+  }
 }
