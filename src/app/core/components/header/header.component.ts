@@ -44,14 +44,17 @@ export class HeaderComponent implements OnInit {
   }
 
   handleGoHome() {
+    this.isMenuOpen = false;
     this.router.navigate(['']);
   }
 
   handleGoProfile() {
+    this.isMenuOpen = false;
     this.router.navigate(['profile']);
   }
 
   async handleLogout() {
+    this.isMenuOpen = false;
     await this.authService.logout(this.user.userId);
     this.isLoggedIn = false;
     this.store.dispatch(

@@ -1,5 +1,12 @@
-<div class="root {{ size }} border-radius-{{ borderRadius }}">
-  <img *ngIf="!!src" [src]="src" alt="Avatar User" />
-  <div *ngIf="!src" class="user-first-letter user-first-letter-size-{{ size }}">{{ userName.charAt(0) }}</div>
-  <div *ngIf="isOnline" class="status status-{{ size }}-size"></div>
-</div>
+<a href="/profile/{{ userId }}">
+  <div class="root {{ size }} border-radius-{{ borderRadius }}">
+    <img *ngIf="!!src" [src]="src" alt="Avatar User" />
+    <div
+      *ngIf="!src"
+      class="user-first-letter user-first-letter-size-{{ size }}"
+    >
+      {{ userName.charAt(0) }}
+    </div>
+    <div *ngIf="isOnline" class="status status-{{ size }}-size"></div>
+  </div>
+</a>

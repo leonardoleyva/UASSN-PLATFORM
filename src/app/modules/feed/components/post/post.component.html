@@ -1,7 +1,11 @@
 <div class="root">
   <header class="post-header">
     <div class="post-header-owner">
-      <app-avatar [src]="imageURL" [userName]="userName"></app-avatar>
+      <app-avatar
+        [userId]="userId !== currentUserId ? userId : ''"
+        [src]="imageURL"
+        [userName]="userName"
+      ></app-avatar>
       <div class="post-header-owner-info">
         <h3>{{ userName }}</h3>
         <h4>{{ facultyName }}</h4>
@@ -13,7 +17,11 @@
   </header>
   <div class="post-body">
     {{ postContent.text }}
-    <img *ngIf="!!postContent.img" src="{{ postContent.img }}" alt="Post image" />
+    <img
+      *ngIf="!!postContent.img"
+      src="{{ postContent.img }}"
+      alt="Post image"
+    />
   </div>
   <div class="post-footer">
     <div class="post-footer-actions">

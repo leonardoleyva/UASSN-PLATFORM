@@ -24,6 +24,7 @@
   <div class="posts-container">
     <app-post
       *ngFor="let post of posts"
+      [currentUserId]="user.userId"
       [userId]="post.userId"
       [userName]="post.userName"
       [userImg]="post.profileImg"

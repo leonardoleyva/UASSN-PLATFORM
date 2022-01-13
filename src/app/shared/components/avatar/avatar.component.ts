@@ -9,6 +9,7 @@ type BorderRadiusSize = 'xs' | 'sm' | 'md';
   styleUrls: ['./avatar.component.scss'],
 })
 export class AvatarComponent {
+  @Input() userId: string = '';
   @Input() userName: string = '';
   @Input() src: string = '';
   @Input() size: AvatarSize = 'md';

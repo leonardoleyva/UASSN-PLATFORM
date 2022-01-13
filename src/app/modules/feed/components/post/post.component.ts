@@ -8,6 +8,7 @@ import { getImageURL } from 'src/services/utils/functions';
   styleUrls: ['./post.component.scss'],
 })
 export class PostComponent implements OnInit {
+  @Input() currentUserId: string = '';
   @Input() userId: string = '';
   @Input() userName: string = '';
   @Input() userImg: string = '';
@@ -19,7 +20,7 @@ export class PostComponent implements OnInit {
 
   imageURL = '';
 
-  constructor(private feedService: FeedService) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.setUserProfileImg();
