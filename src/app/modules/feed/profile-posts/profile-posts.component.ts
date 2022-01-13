@@ -29,6 +29,7 @@ const defaultUserValue: BasicUserData = {
 export class ProfilePostsComponent implements OnInit {
   currentUser: BasicUserData = { ...defaultUserValue };
   userProfile: BasicUserData = { ...defaultUserValue };
+  isLoadingUserData: boolean = true;
   posts: Post[] = [];
   userSubscription: Subscription | undefined;
   unsubscribePosts: Unsubscribe | undefined;
@@ -45,14 +46,15 @@ export class ProfilePostsComponent implements OnInit {
   ngOnInit(): void {
     const profileId = this.userProfile.userId;
     if (profileId) {
-      this.handleFetchUserProfile(profileId);
-      this.handleFetchUserPosts(this.userProfile.userId);
+      this.handleExternalUser(profileId)
     }
 
     this.userSubscription = this.store.select('userState').subscribe((data) => {
       this.currentUser = data;
 
       if (!this.currentUser.userId || profileId) return;
+
+      this.isLoadingUserData = false;
 
       this.handleFetchUserPosts(this.currentUser.userId);
     });
@@ -63,11 +65,17 @@ export class ProfilePostsComponent implements OnInit {
     this.userSubscription?.unsubscribe();
   }
 
+  async handleExternalUser(profileId: string) {
+    await this.handleFetchUserProfile(profileId);
+    this.handleFetchUserPosts(profileId);
+  }
+
   async handleFetchUserProfile(userId: string) {
     try {
       const user = await this.userService.getBasicData(userId);
 
       this.userProfile = user;
+      this.isLoadingUserData = false;
     } catch (error: any) {}
   }
 

@@ -8,14 +8,22 @@
     <div class="profile-data">
       <div class="image-container">
         <img
-          *ngIf="userProfile.profileImg || currentUser.profileImg"
+          *ngIf="userProfile.profileImg || currentUser.profileImg && !isLoadingUserData"
           class="profile-data-img"
-          [src]="userProfile.profileImg || currentUser.profileImg"
+          [src]="
+            !isLoadingUserData
+              ? userProfile.profileImg || currentUser.profileImg
+              : ''
+          "
           alt="User profile image"
         />
 
-        <div *ngIf="!currentUser.profileImg" class="profile-data-without-img">
-          {{ userProfile.name.charAt(0) || currentUser.name.charAt(0) }}
+        <div *ngIf="!currentUser.profileImg || isLoadingUserData" class="profile-data-without-img">
+          {{
+            !isLoadingUserData
+              ? userProfile.name.charAt(0) || currentUser.name.charAt(0)
+              : ""
+          }}
         </div>
 
         <div *ngIf="!userProfile.userId" class="overlay-upload-image">
@@ -32,8 +40,16 @@
       </div>
 
       <div class="profile-personal-data">
-        <h2>{{ userProfile.name || currentUser.name }}</h2>
-        <p>{{ userProfile.faculty.name || currentUser.faculty.name }}</p>
+        <h2>
+          {{ !isLoadingUserData ? userProfile.name || currentUser.name : "" }}
+        </h2>
+        <p>
+          {{
+            !isLoadingUserData
+              ? userProfile.faculty.name || currentUser.faculty.name
+              : ""
+          }}
+        </p>
       </div>
     </div>
   </div>

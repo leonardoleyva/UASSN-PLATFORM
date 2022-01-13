@@ -7,3 +7,21 @@
   background-color: #fafafa;
   overflow: hidden;
 }
+
+@media screen and (max-width: 1024px) {
+  .profile-container {
+    grid-template-columns: 0px calc(100% - 0px - 240px) 240px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .profile-container {
+    grid-template-columns: 0px calc(100% - 0px - 180px) 180px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .profile-container {
+    grid-template-columns: 0px calc(100% - 0px - 0px) 0px;
+  }
+}
