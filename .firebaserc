@@ -1,13 +1,4 @@
 {
-  "targets": {
-    "uassn-dev": {
-      "hosting": {
-        "uassn-platform": [
-          "uassn-dev"
-        ]
-      }
-    }
-  },
   "projects": {
     "default": "uassn-dev"
   }
