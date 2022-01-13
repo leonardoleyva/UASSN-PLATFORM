@@ -8,6 +8,7 @@ export const environment = {
     authDomain: 'uassn-dev.firebaseapp.com',
     messagingSenderId: '987504028886',
   },
+  STORAGE_URL: 'https://firebasestorage.googleapis.com/v0/b/uassn-dev.appspot.com/o',
   production: true,
   PLATFORM_NAME: 'UASSN',
 };
