@@ -19,20 +19,20 @@ import { getImageURL } from 'src/services/utils/functions';
 export class ChatRoomComponent implements OnInit, AfterViewChecked {
   @Input() userId: string = '';
   @Input() members: ChatMember[] = [];
+  @Input() convMember: ChatMember = {
+    name: '',
+    userId: '',
+  };
   @Input() messages: Message[] | null = null;
   @Output() onClose = new EventEmitter();
   @Output() onSubmit = new EventEmitter();
   @ViewChild('scrollMe') private myScrollContainer: ElementRef | undefined;
 
   isSmoothScroll: boolean = false;
-  convMember: ChatMember = {
-    name: '',
-    userId: '',
-  };
-
   value: { text: string } = {
     text: '',
   };
+  isEmojiSelectorOpen: boolean = false;
 
   constructor() {}
 
@@ -49,7 +49,27 @@ export class ChatRoomComponent implements OnInit, AfterViewChecked {
   }
 
   handleSubmit() {
+    if (!this.value.text) return;
+
     this.onSubmit.emit(this.value);
+    this.value.text = '';
+    this.isEmojiSelectorOpen = false;
+  }
+
+  handleSelectEmoji(emojiEvent: {
+    $event: PointerEvent;
+    emoji: { native: string };
+  }) {
+    this.value.text += emojiEvent.emoji.native;
+  }
+
+  handleToggleEmojiSelector() {
+    this.isEmojiSelectorOpen = !this.isEmojiSelectorOpen;
+    console.log(this.isEmojiSelectorOpen);
+  }
+
+  handleEmojiSelectorBlur() {
+    this.isEmojiSelectorOpen = false;
   }
 
   handleClose() {

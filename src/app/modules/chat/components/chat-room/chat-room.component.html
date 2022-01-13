@@ -1,11 +1,11 @@
 <section class="root">
   <header class="chat-room-header">
     <app-avatar
-      src="https://firebasestorage.googleapis.com/v0/b/uassn-dev.appspot.com/o/users%2FFy1wQvYLbygxXxcZKzOsbICQzgi1.jpg?alt=media&token=a6c84f8e-a82e-4f9b-ad84-bcb08e65d197"
+      [src]="getImage(convMember.userId)"
       [isOnline]="false"
     ></app-avatar>
     <div>
-      <h3>{{ convMember.name || "asd" }}</h3>
+      <h3>{{ convMember.name }}</h3>
     </div>
     <img
       class="chat-settings-icon"
@@ -47,13 +47,42 @@
       [value]="value.text"
     ></textarea>
 
+    <button
+      class="message-maker-actions-emojis"
+      (click)="handleToggleEmojiSelector()"
+      (blur)="handleEmojiSelectorBlur()"
+    >
+      <img
+        src="{{
+          !!value.text
+            ? 'assets/shared/svg/emoji-active-icon.svg'
+            : 'assets/shared/svg/emoji-icon.svg'
+        }}"
+        alt=""
+      />
+
+      <emoji-mart
+        class="emoji-selector"
+        [ngClass]="{
+          'emoji-selector-open': isEmojiSelectorOpen
+        }"
+        [showPreview]="false"
+        title="UASSN"
+        [perLine]="8"
+        set="facebook"
+        (emojiSelect)="handleSelectEmoji($event)"
+      ></emoji-mart>
+    </button>
+
     <span class="separator-actions-submit"></span>
 
-    <img
-      class="message-maker-submit"
-      src="assets/shared/svg/submit-icon.svg"
-      alt="Submit icon"
-      (click)="handleSubmit()"
-    />
+    <button class="message-maker-submit-btn" (click)="handleSubmit()">
+      <img
+        class="message-maker-submit"
+        [ngClass]="{ 'message-maker-submit-disabled': !value.text }"
+        src="assets/shared/svg/submit-icon.svg"
+        alt="Submit icon"
+      />
+    </button>
   </footer>
 </section>

@@ -15,12 +15,15 @@
         />
 
         <div *ngIf="!currentUser.profileImg" class="profile-data-without-img">
-          L
+          {{ userProfile.name.charAt(0) || currentUser.name.charAt(0) }}
         </div>
 
-        <div class="overlay-upload-image">Actualizar foto de perfil</div>
+        <div *ngIf="!userProfile.userId" class="overlay-upload-image">
+          Actualizar foto de perfil
+        </div>
 
         <input
+          *ngIf="!userProfile.userId"
           type="file"
           class="input-image"
           accept="image/png, image/jpeg, image/jpg"
@@ -36,7 +39,7 @@
   </div>
 
   <div
-    *ngIf="(!userProfile.userId && userProfile.userId !== currentUser.userId)"
+    *ngIf="!userProfile.userId && userProfile.userId !== currentUser.userId"
     class="post-maker-container"
   >
     <app-post-maker (onSubmit)="handleSubmitPost($event)"></app-post-maker>

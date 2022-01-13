@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { Auth, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
 import { doc, Firestore, updateDoc } from '@angular/fire/firestore';
 import { AuthUser } from './type';
 
@@ -21,10 +21,22 @@ export class AuthenticationService {
       await updateDoc(userRef, {
         isOnline: true,
       });
-      const token = await user.getIdToken()
+      const token = await user.getIdToken();
       return token + 'tokenBridge' + user.uid;
     } catch (error: any) {
-      throw error
+      throw error;
+    }
+  }
+
+  async logout(userId: string): Promise<void> {
+    try {
+      await signOut(this.auth);
+      const userRef = doc(this.db, 'users', userId);
+      await updateDoc(userRef, {
+        isOnline: false,
+      });
+    } catch (error) {
+      throw error;
     }
   }
 }

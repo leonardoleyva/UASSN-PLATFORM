@@ -105,7 +105,6 @@ export class HomePostsComponent implements OnInit, OnDestroy {
   async handleChatRoomSubmit(value: { text: string }) {
     if (!value.text) return;
     this.sendMessage(value);
-    console.log(value);
   }
 
   getChatRoomMessages(chatRoomId: string) {

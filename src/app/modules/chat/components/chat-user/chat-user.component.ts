@@ -24,7 +24,7 @@ export class ChatUserComponent implements OnInit {
   handleClick() {
     const user = {
       userId: this.userId,
-      userName: this.userName,
+      name: this.userName,
     };
     this.onClick.emit(user);
   }

@@ -39,6 +39,7 @@ import { ChatUserComponent } from './modules/chat/components/chat-user/chat-user
 import { HomeUsersComponent } from './modules/chat/home-users/home-users.component';
 import { ChatRoomComponent } from './modules/chat/components/chat-room/chat-room.component';
 import { chatReducer } from './modules/chat/state/chat.reducer';
+import { HeaderMenuComponent } from './core/components/header-menu/header-menu.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { chatReducer } from './modules/chat/state/chat.reducer';
     ChatUserComponent,
     HomeUsersComponent,
     ChatRoomComponent,
+    HeaderMenuComponent,
   ],
   imports: [
     BrowserModule,

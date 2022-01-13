@@ -5,14 +5,19 @@ export const initialChatRoomState: actions.ChatRoomState = {
   chatRoomId: '',
   members: [],
   isOpen: false,
+  convMember: {
+    name: '',
+    userId: '',
+  },
 };
 
 const _chatReducer = createReducer(
   initialChatRoomState,
-  on(actions.setChatRoom, (state, { chatRoomId, members }) => ({
+  on(actions.setChatRoom, (state, { chatRoomId, members, convMember }) => ({
     ...state,
     chatRoomId,
     members,
+    convMember,
   })),
   on(actions.setIsChatRoomOpen, (state, { isOpen }) => ({ ...state, isOpen }))
 );

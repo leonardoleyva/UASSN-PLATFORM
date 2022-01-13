@@ -1,0 +1,48 @@
+.root {
+  position: absolute;
+  top: 12px;
+  left: -200px;
+  z-index: 4999;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 50% 50%;
+  width: 200px;
+  height: 0px;
+  border-radius: 6px;
+  background: #ffffff;
+  filter: drop-shadow(0px 0px 8px rgba(107, 107, 107, 0.2));
+  border: none;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+
+  & > :last-child {
+    color: #b71417;
+  }
+}
+
+.is-open {
+  height: 100px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  width: calc(100% - 32px);
+  height: 100%;
+  padding: 0px 16px;
+  opacity: 1;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 16px;
+  color: #384A6D;
+}
+
+.menu-item:hover {
+  background: #fafafa;
+}
+
+.menu-item-closed {
+  opacity: 0;
+}

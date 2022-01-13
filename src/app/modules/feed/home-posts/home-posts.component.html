@@ -35,9 +35,10 @@
   </div>
 
   <app-chat-room
-    *ngIf="chatRoom.chatRoomId && chatRoom.isOpen"
+    *ngIf="chatRoom.chatRoomId.length > 0 && chatRoom.convMember.name"
     [userId]="user.userId"
     [members]="chatRoom.members"
+    [convMember]="chatRoom.convMember"
     (onSubmit)="handleChatRoomSubmit($event)"
     [messages]="chatRoomMessages"
   ></app-chat-room>

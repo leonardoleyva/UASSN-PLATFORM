@@ -103,7 +103,6 @@ export class UserService {
 
         users.push(data);
       });
-      console.log(users)
     });
 
     return { users, unsubscribe };

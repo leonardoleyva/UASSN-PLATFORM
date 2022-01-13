@@ -40,6 +40,11 @@
 .menu-icon {
   color: #125e99;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.menu-icon-reverse {
+  transform: rotate(180deg);
 }
 
 .unauth-header {

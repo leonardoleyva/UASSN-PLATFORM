@@ -16,7 +16,14 @@
         [src]="user.profileImg"
         [isOnline]="isLoggedIn"
       ></app-avatar>
-      <i class="pi pi-chevron-down menu-icon"></i>
+      <div style="position: relative">
+        <i
+          (click)="handleClickMenu()"
+          class="pi pi-chevron-down menu-icon"
+          [ngClass]="{ 'menu-icon-reverse': isMenuOpen }"
+        ></i>
+        <app-header-menu [isOpen]="isMenuOpen" (onLogout)="handleLogout()"></app-header-menu>
+      </div>
     </div>
   </div>
 </header>

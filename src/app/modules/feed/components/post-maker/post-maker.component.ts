@@ -56,6 +56,6 @@ export class PostMakerComponent implements OnInit {
   }
 
   handleBlur() {
-    console.log('asdasd');
+    console.log('Blur');
   }
 }

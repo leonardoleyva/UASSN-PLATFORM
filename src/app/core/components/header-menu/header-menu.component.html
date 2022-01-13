@@ -1,0 +1,16 @@
+<button autofocus class="root" [ngClass]="{ 'is-open': isOpen }">
+  <div
+    class="menu-item"
+    [ngClass]="{ 'menu-item-closed': !isOpen }"
+    (click)="handleGoProfile()"
+  >
+    Ver mi perfil
+  </div>
+  <div
+    class="menu-item"
+    [ngClass]="{ 'menu-item-closed': !isOpen }"
+    (click)="handleLogout()"
+  >
+    Cerrar sesion
+  </div>
+</button>

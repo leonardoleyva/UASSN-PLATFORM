@@ -68,6 +68,8 @@ export class HomeUsersComponent implements OnInit, OnDestroy {
       members,
     });
 
-    this.chatStore.dispatch(setChatRoom({ members, chatRoomId }));
+    this.chatStore.dispatch(
+      setChatRoom({ members, chatRoomId, convMember: user })
+    );
   }
 }

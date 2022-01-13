@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { AuthenticationService } from 'src/services/auth/service';
 import { BasicUserData } from 'src/services/user/type';
+import { setUserState } from '../../auth/user.actions';
 
 @Component({
   selector: 'app-header',
@@ -18,8 +21,13 @@ export class HeaderComponent implements OnInit {
       name: '',
     },
   };
+  isMenuOpen: boolean = false;
 
-  constructor(private store: Store<{ userState: BasicUserData }>) {}
+  constructor(
+    private authService: AuthenticationService,
+    private store: Store<{ userState: BasicUserData }>,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.store.select('userState').subscribe((data) => {
@@ -29,5 +37,30 @@ export class HeaderComponent implements OnInit {
         this.isLoggedIn = true;
       }
     });
+  }
+
+  handleClickMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  handleGoProfile() {}
+
+  async handleLogout() {
+    await this.authService.logout(this.user.userId);
+    this.isLoggedIn = false;
+    this.store.dispatch(
+      setUserState({
+        userId: '',
+        name: '',
+        profileImg: '',
+        faculty: {
+          id: '',
+          name: '',
+        },
+      })
+    );
+
+    localStorage.removeItem('token');
+    this.router.navigate(['login']);
   }
 }
